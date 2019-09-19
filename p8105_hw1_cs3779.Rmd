@@ -1,0 +1,12 @@
+---
+title: "p8105_hw1_cs3779"
+author: "CJ Snyder"
+date: "9/19/2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
