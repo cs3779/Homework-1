@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-# Homework 1 - Problem 1
+# Problem 1
 ## Creating Dataframe _hw_df_
 ```{r}
 hw_df = tibble(
@@ -34,19 +34,22 @@ Meanwhile, it was not possible to take the mean (i.e. came back as '**N/A**') fo
 # Converting logical vector to numeric
 logic_to_numeric = as.numeric(hw_df$logic_vec)
 prod_log_num = logic_to_numeric * (hw_df$rand_var)
+mean(prod_log_num)
 
 # Converting logical vector to factor
 logic_to_factor = as.factor(hw_df$logic_vec)
 prod_log_fact = logic_to_factor * (hw_df$rand_var)
+mean(prod_log_fact)
 
 #Converting logical vector to factor then numeric
 logic_factor_numeric = as.numeric(logic_to_factor)
 prod_log_fact_num = logic_factor_numeric * (hw_df$rand_var)
+mean(prod_log_fact_num)
 ```
 
-Trying to take the means of the converted variables indicates that you can only take the mean of a numeric variable since the output for the mean of the _prod_log_fact_ variable was '**N/A**' - similar to above. 
+Trying to take the means of the converted variables indicates that you can only take the mean of a numeric variable since the output for the mean of the _prod_log_fact_ variable was '**N/A**' due to _logic_to_factor_ is a _factor_ variable - similar to the first part of Problem 1. 
 
-# Homework 1 - Problem 2
+# Problem 2
 
 ## Creating Dataframe _hwplot_df_ for Plotting
 ```{r}
@@ -64,6 +67,18 @@ The dataframe _hwplot_df_ includes `r nrow(hwplot_df)` observations and `r ncol(
 
 ## Scatterplot of Dataframe _hwplot_df_
 ```{r}
+hw_plot_logic = ggplot(hwplot_df, aes(x=x,y=y,color=logic_vec)) + geom_point()
+hw_plot_logic
 
+ggsave(hw_plot_logic, file = "hw_plot_logic.pdf")
+
+
+#The color scale provides a gradient of color for shading the plot points. However, since this numeric variable is transforming a logical variable, the only two possible values are 0 or 1. This causes the points to be colored in a similar fashion as the logical plot - two distinct groupings of points (those whos sums are <1 and those whos sums are >1).
+hw_plot_numeric = ggplot(hwplot_df, aes(x=x,y=y,color=num_vec)) + geom_point()
+hw_plot_numeric
+
+
+#The color scale mimics exactly that of the logic_vec plot, where there are two distinct groupings of points (those whos sums are <1 and those whos sums are >1).
+hw_plot_logic_factor = ggplot(hwplot_df, aes(x=x,y=y,color=fact_vec)) + geom_point()
+hw_plot_logic_factor
 ```
-
