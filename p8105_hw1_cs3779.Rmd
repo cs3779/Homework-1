@@ -11,7 +11,7 @@ library(tidyverse)
 ```
 
 # Homework 1 - Problem 1
-## Creating Data Frame
+## Creating Dataframe _hw_df_
 ```{r}
 hw_df = tibble(
   rand_var = rnorm(8),
@@ -26,10 +26,10 @@ mean(pull(hw_df, char_vec))
 mean(pull(hw_df, fact_vec))
 ```
 
-Trying to take the mean for _rand_var_ (numeric) and _logic_vec_ (logical) were both successful. The mean of _logic_vec_ might be the mean of the variables that came back TRUE if its value are greater than 0. 
+Trying to take the mean for _rand_var_ (numeric) and _logic_vec_ (logical) were both successful. The mean of _logic_vec_ might be the mean of the variables that came back **TRUE** if its value are greater than 0. 
 Meanwhile, it was not possible to take the mean (i.e. came back as '**N/A**') for _char_vec_ or _fact_vec_ as they are both neither numeric nor logical. The only two types of variable that the mean function works on are numeric or logical.
 
-### Dataframe Variable Conversion 
+### Dataframe _hw_df_ Variable Conversion 
 ```{r, eval=FALSE}
 # Converting logical vector to numeric
 logic_to_numeric = as.numeric(hw_df$logic_vec)
@@ -46,4 +46,24 @@ prod_log_fact_num = logic_factor_numeric * (hw_df$rand_var)
 
 Trying to take the means of the converted variables indicates that you can only take the mean of a numeric variable since the output for the mean of the _prod_log_fact_ variable was '**N/A**' - similar to above. 
 
+# Homework 1 - Problem 2
+
+## Creating Dataframe _hwplot_df_ for Plotting
+```{r}
+hwplot_df = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  logic_vec = x + y > 1,
+  num_vec = as.numeric(logic_vec),
+  fact_vec = as.factor(logic_vec)
+)
+```
+
+### Dataframe _hwplot_df_ Description
+The dataframe _hwplot_df_ includes `r nrow(hwplot_df)` observations and `r ncol(hwplot_df)` variables, including: _x_, _y_, _logic_vec_, _num_vec_, & _fact_vec_. The number of observations where the sum of _x+y=1_ is `r sum(hwplot_df$logic_vec)`. Additionally, the mean of _x_ is `r mean(hwplot_df$x)`, the median is `r median(hwplot_df$x)`, and the standard deviation is `r sd(hwplot_df$x)`.
+
+## Scatterplot of Dataframe _hwplot_df_
+```{r}
+
+```
 
